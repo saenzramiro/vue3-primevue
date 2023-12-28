@@ -1,30 +1,103 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
-</script>
-
 <template>
-	<div>
-		<a href="https://vitejs.dev" target="_blank">
-			<img src="/vite.svg" class="logo" alt="Vite logo" />
-		</a>
-		<a href="https://vuejs.org/" target="_blank">
-			<img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-		</a>
-	</div>
-	<HelloWorld msg="Vite + Vue" />
+	<header>Header</header>
+	<section>
+		<nav><Menu :model="items" /></nav>
+		<main id="main">
+			<router-view />
+		</main>
+		<aside>asdasd</aside>
+	</section>
+	<footer>Footer</footer>
 </template>
+<script lang="ts">
+import router from '@/router';
+import { defineComponent } from 'vue';
 
-<style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
+export default defineComponent({
+	name: 'App',
+	data() {
+		return {
+			items: [
+				{
+					label: 'Documents',
+					items: [
+						{
+							label: 'Dashboard',
+							icon: 'pi pi-plus',
+							show: 'dashboard',
+							command: this.onMenuClick,
+						},
+						{
+							label: 'HelloWorld',
+							icon: 'pi pi-search',
+							show: 'hello',
+							command: this.onMenuClick,
+						},
+					],
+				},
+				{
+					label: 'Profile',
+					items: [
+						{
+							label: 'Settings',
+							icon: 'pi pi-cog',
+						},
+						{
+							label: 'Logout',
+							icon: 'pi pi-sign-out',
+						},
+					],
+				},
+			],
+		};
+	},
+	methods: {
+		onMenuClick(event: any) {
+			router.push(event.item.show);
+		},
+	},
+});
+</script>
+<style>
+html,
+body {
+	height: 100%;
+	margin: 0;
 }
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
+#app {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+header {
+	background-color: #f00;
+	height: 100px;
+}
+section {
+	background-color: #0f0;
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+}
+nav {
+	background-color: aqua;
+	flex: 1;
+}
+nav .p-menu {
+	height: 100%;
+}
+main {
+	background-color: blueviolet;
+	flex: 5;
+}
+aside {
+	background-color: chocolate;
+	flex: 1;
+	width: 200px;
+	display: none;
+}
+footer {
+	background-color: darkolivegreen;
+	height: 100px;
 }
 </style>
