@@ -1,36 +1,34 @@
-<script setup lang="ts">
+<template>
+	<Card style="width: 25rem; overflow: hidden">
+		<template #header>
+			<img alt="user header" src="@/assets/vue.svg" class="w-full" />
+		</template>
+		<template #title>Advanced Card</template>
+		<template #subtitle>Card subtitle</template>
+		<template #content>
+			<p class="m-0">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam
+				repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+			</p>
+		</template>
+		<template #footer>
+			<div class="flex gap-3 mt-1">
+				<Button label="Cancel" severity="secondary" outlined class="w-full" />
+				<Button type="button" class="w-full" @click="counterStore.increment()">count is {{ counterStore.count }}</Button>
+			</div>
+		</template>
+	</Card>
+</template>
+<script lang="ts">
+import { mapStores } from 'pinia';
 import { useCounterStore } from '@/store';
 
-const counterStore = useCounterStore();
-
-defineProps<{ msg: string }>();
+export default {
+	name: 'HelloWorld',
+	computed: {
+		...mapStores(useCounterStore, ['counterStore']),
+	},
+};
 </script>
 
-<template>
-	<h1>{{ msg }}</h1>
-
-	<div class="card">
-		<Button type="button" @click="counterStore.increment()">count is {{ counterStore.count }}</Button>
-		<p>
-			Edit
-			<code>components/HelloWorld.vue</code> to test HMR
-		</p>
-	</div>
-
-	<p>
-		Check out
-		<a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the official Vue + Vite starter
-	</p>
-	<p>
-		Install
-		<a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-		in your IDE for a better DX
-	</p>
-	<p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
-</template>
-
-<style scoped>
-.read-the-docs {
-	color: #888;
-}
-</style>
+<style scoped></style>

@@ -1,6 +1,6 @@
 <template>
 	<header>
-		<Menubar :model="items">
+		<Menubar :model="items" class="gap-4">
 			<template #start>
 				<svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-2rem">
 					<path
@@ -38,15 +38,13 @@
 		<main id="main">
 			<router-view />
 		</main>
-		<aside>asdasd</aside>
 	</section>
-	<footer>Footer</footer>
+	<footer>Copyright</footer>
 </template>
 <script lang="ts">
 import router from '@/router';
-import { defineComponent } from 'vue';
 
-export default defineComponent({
+export default {
 	name: 'App',
 	data() {
 		return {
@@ -90,7 +88,7 @@ export default defineComponent({
 			router.push(event.item.show);
 		},
 	},
-});
+};
 </script>
 <style>
 :root {
@@ -125,11 +123,6 @@ main {
 	background-color: #e4e4e4;
 	flex: 5;
 	padding: 20px;
-}
-aside {
-	flex: 1;
-	width: 200px;
-	display: none;
 }
 footer {
 	background-color: #b6b6b6;
