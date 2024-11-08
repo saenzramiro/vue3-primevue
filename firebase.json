@@ -1,0 +1,49 @@
+{
+	"emulators": {
+		"functions": {
+			"port": 5001
+		},
+		"auth": {
+			"port": 9099
+		},
+		"storage": {
+			"port": 9199
+		},
+		"ui": {
+			"enabled": true
+		},
+		"singleProjectMode": true
+	},
+	"functions": {
+		"source": "api",
+		"predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"],
+		"ignore": [
+			"node_modules",
+			".gitignore",
+			"scripts",
+			"test",
+			"jest.config.js",
+			"tsconfig.json",
+			"*.log",
+			"jest.config.js",
+			"*.md",
+			".npmrc",
+			"tsconfig.json",
+			".env.*"
+		]
+	},
+	"storage": {
+		"rules": "storage.rules"
+	},
+	"hosting": {
+		"public": "dist",
+		"rewrites": [
+			{
+				"source": "**",
+				"destination": "/index.html"
+			}
+		],
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"predeploy": ["npm run lint", "npm run build"]
+	}
+}

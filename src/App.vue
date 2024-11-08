@@ -1,131 +1,184 @@
 <template>
-	<header>
-		<Menubar :model="items" class="gap-4">
-			<template #start>
-				<svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-2rem">
-					<path
-						d="M25.87 18.05L23.16 17.45L25.27 20.46V29.78L32.49 23.76V13.53L29.18 14.73L25.87 18.04V18.05ZM25.27 35.49L29.18 31.58V27.67L25.27 30.98V35.49ZM20.16 17.14H20.03H20.17H20.16ZM30.1 5.19L34.89 4.81L33.08 12.33L24.1 15.67L30.08 5.2L30.1 5.19ZM5.72 14.74L2.41 13.54V23.77L9.63 29.79V20.47L11.74 17.46L9.03 18.06L5.72 14.75V14.74ZM9.63 30.98L5.72 27.67V31.58L9.63 35.49V30.98ZM4.8 5.2L10.78 15.67L1.81 12.33L0 4.81L4.79 5.19L4.8 5.2ZM24.37 21.05V34.59L22.56 37.29L20.46 39.4H14.44L12.34 37.29L10.53 34.59V21.05L12.42 18.23L17.45 26.8L22.48 18.23L24.37 21.05ZM22.85 0L22.57 0.69L17.45 13.08L12.33 0.69L12.05 0H22.85Z"
-						fill="var(--primary-color)"
-					/>
-					<path
-						d="M30.69 4.21L24.37 4.81L22.57 0.69L22.86 0H26.48L30.69 4.21ZM23.75 5.67L22.66 3.08L18.05 14.24V17.14H19.7H20.03H20.16H20.2L24.1 15.7L30.11 5.19L23.75 5.67ZM4.21002 4.21L10.53 4.81L12.33 0.69L12.05 0H8.43002L4.22002 4.21H4.21002ZM21.9 17.4L20.6 18.2H14.3L13 17.4L12.4 18.2L12.42 18.23L17.45 26.8L22.48 18.23L22.5 18.2L21.9 17.4ZM4.79002 5.19L10.8 15.7L14.7 17.14H14.74H15.2H16.85V14.24L12.24 3.09L11.15 5.68L4.79002 5.2V5.19Z"
-						fill="var(--text-color)"
-					/>
-				</svg>
-			</template>
-			<template #item="{ item, props, hasSubmenu, root }">
-				<a v-ripple class="flex align-items-center" v-bind="props.action">
-					<span :class="item.icon" />
-					<span class="ml-2">{{ item.label }}</span>
-					<Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
-					<span v-if="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
-					<i
-						v-if="hasSubmenu"
-						:class="['pi pi-angle-down text-primary', { 'pi-angle-down ml-2': root, 'pi-angle-right ml-auto': !root }]"
-					></i>
-				</a>
-			</template>
-			<template #end>
-				<div class="flex align-items-center gap-2">
-					<InputText placeholder="Search" type="text" class="w-8rem sm:w-auto" />
-					<Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+	<!-- Prime components used globally  -->
+	<ConfirmPopup></ConfirmPopup>
+	<Toast />
+	<div class="flex-1 flex bg-surface-0 dark:bg-surface-950 gap-4">
+		<div class="w-24 lg:block hidden m-4 p-6 bg-surface-100 dark:bg-surface-800 rounded-2xl">
+			<div class="h-full w-full flex flex-col">
+				<div class="flex-1 flex flex-col items-center overflow-auto">
+					<svg
+						class="fill-surface-900 dark:fill-surface-0"
+						width="40"
+						height="40"
+						viewBox="0 0 40 40"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<g clip-path="url(#clip0_5691_32025)">
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M25.5557 11.6853C25.3082 11.5199 25.0541 11.3661 24.7943 11.2242C22.3709 9.90028 20 7.76142 20 5V0C23.9556 0 27.8224 1.17298 31.1114 3.37061C34.4004 5.56823 36.9638 8.69181 38.4776 12.3463C39.9913 16.0008 40.3874 20.0222 39.6157 23.9018C38.844 27.7814 36.9392 31.3451 34.1421 34.1421C31.3451 36.9392 27.7814 38.844 23.9018 39.6157C20.0222 40.3874 16.0008 39.9913 12.3463 38.4776C8.69181 36.9638 5.56823 34.4004 3.37061 31.1114C1.17298 27.8224 0 23.9556 0 20H5C7.76142 20 9.90028 22.3709 11.2242 24.7943C11.3661 25.0541 11.5199 25.3082 11.6853 25.5557C12.7841 27.2002 14.3459 28.4819 16.1732 29.2388C18.0004 29.9957 20.0111 30.1937 21.9509 29.8078C23.8907 29.422 25.6725 28.4696 27.0711 27.0711C28.4696 25.6725 29.422 23.8907 29.8078 21.9509C30.1937 20.0111 29.9957 18.0004 29.2388 16.1732C28.4819 14.3459 27.2002 12.7841 25.5557 11.6853Z"
+							/>
+							<path
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M11 3.89813e-06C10.4477 4.13734e-06 10.0052 0.448821 9.95004 0.998347C9.85264 1.96909 9.61352 2.92218 9.2388 3.82683C8.73625 5.04009 7.99965 6.14248 7.07106 7.07107C6.14249 7.99966 5.04009 8.73625 3.82683 9.2388C2.92217 9.61352 1.96908 9.85264 0.998343 9.95004C0.448818 10.0052 4.1754e-07 10.4477 3.93399e-07 11L0 20C2.62644 20 5.22715 19.4827 7.65368 18.4776C10.0802 17.4725 12.285 15.9993 14.1421 14.1421C15.9993 12.285 17.4725 10.0802 18.4776 7.65367C19.4827 5.22715 20 2.62643 20 0L11 3.89813e-06Z"
+							/>
+						</g>
+						<defs>
+							<clipPath id="clip0_5691_32025">
+								<rect width="40" height="40" fill="white" />
+							</clipPath>
+						</defs>
+					</svg>
+					<div class="w-full h-[1px] bg-surface-200 dark:bg-surface-700 my-6" />
+					<nav class="flex flex-col items-center gap-4">
+						<template v-for="(item, index) of navs" :key="index">
+							<Button
+								:class="
+									selectedNav === item.label
+										? 'bg-surface-0 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-surface'
+										: 'bg-transparent border-transparent text-surface-600 dark:text-surface-500'
+								"
+								class="w-10 h-10 flex items-center justify-center rounded-lg border hover:bg-surface-0 dark:hover:bg-surface-950 hover:text-surface-900 dark:hover:text-surface-0 hover:border-surface transition-all"
+								@click="selectedNav = item.label"
+							>
+								<i :class="item.icon" class="text-lg leading-none" />
+							</Button>
+						</template>
+					</nav>
 				</div>
-			</template>
-		</Menubar>
-	</header>
-	<section>
-		<nav><Menu :model="items" /></nav>
-		<main id="main">
-			<router-view />
-		</main>
-	</section>
-	<footer>Copyright</footer>
+				<div class="flex flex-col items-center">
+					<div class="flex flex-col items-center gap-2">
+						<template v-for="(item, index) of bottomNavs" :key="index">
+							<Button
+								:class="
+									selectedNav === item.label
+										? 'bg-surface-0 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-surface'
+										: 'bg-transparent border-transparent text-surface-600 dark:text-surface-500'
+								"
+								class="w-10 h-10 flex items-center justify-center rounded-lg border hover:bg-surface-0 dark:hover:bg-surface-950 hover:text-surface-900 dark:hover:text-surface-0 hover:border-surface transition-all"
+								@click="selectedNav = item.label"
+							>
+								<i :class="item.icon" class="text-lg leading-none" />
+							</Button>
+						</template>
+					</div>
+					<div class="w-full h-[1px] bg-surface-200 dark:bg-surface-700 my-6" />
+					<Avatar
+						image="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/circle/avatar-m-18.jpg"
+						class="!w-10 !h-10 cursor-pointer"
+						shape="circle"
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="min-h-screen overflow-auto flex-1 flex flex-col pr-3 pb-3 gap-8 transition-all">
+			<div class="flex flex-wrap py-6 items-start justify-between gap-2">
+				<div class="flex-1 flex items-center gap-2">
+					<a
+						v-styleclass="{
+							selector: '#app-sidebar-floating-slim',
+							enterFromClass: 'hidden',
+							enterActiveClass: 'animate-fadeinleft',
+							leaveToClass: 'hidden',
+							leaveActiveClass: 'animate-fadeoutleft',
+						}"
+						class="cursor-pointer lg:hidden"
+						><i class="pi pi-bars text-xl mr-4"
+					/></a>
+					<div class="flex-1 whitespace-nowrap">
+						<h1 class="text-lg font-medium text-surface-900 dark:text-surface-0">Dashboard</h1>
+						<p class="text-surface-500">Excepteur sint occaecat</p>
+					</div>
+				</div>
+				<div class="flex items-center gap-2">
+					<IconField>
+						<InputIcon class="pi pi-search" />
+						<InputText v-model="searchValue" placeholder="Search" />
+					</IconField>
+					<Button icon="pi pi-bell" severity="secondary" outlined />
+				</div>
+			</div>
+			<div class="min-h-96 w-full border-2 border-surface border-dashed rounded-lg" />
+			<div class="min-h-96 w-full border-2 border-surface border-dashed rounded-lg" />
+		</div>
+	</div>
+	<Search />
+	<Settings />
 </template>
 <script lang="ts">
-import router from '@/router';
+import { mapStores } from 'pinia';
+import { useStateStore } from '@/store/state';
+import { useUserStore } from '@/store/user';
+import Menu from 'primevue/menu';
+import OverlayPanel from 'primevue/overlaypanel';
 
 export default {
 	name: 'App',
+	components: {},
 	data() {
 		return {
-			items: [
+			showProfileMenu: false,
+			showSearchDialog: false,
+			searchValue: '',
+			selectedNav: 'Home',
+			notifications: [
 				{
-					label: 'Documents',
-					items: [
-						{
-							label: 'Dashboard',
-							icon: 'pi pi-plus',
-							show: 'dashboard',
-							command: this.onMenuClick,
-						},
-						{
-							label: 'HelloWorld',
-							icon: 'pi pi-search',
-							show: 'hello',
-							command: this.onMenuClick,
-						},
-					],
+					id: 1,
+					label: 'Amy Elsner',
 				},
-				{
-					label: 'Profile',
-					badge: 3,
-					items: [
-						{
-							label: 'Settings',
-							icon: 'pi pi-cog',
-						},
-						{
-							label: 'Logout',
-							icon: 'pi pi-sign-out',
-						},
-					],
-				},
+			],
+			navs: [
+				{ label: 'Home', icon: 'pi pi-home' },
+				{ label: 'Bookmark', icon: 'pi pi-bookmark' },
+				{ label: 'Users', icon: 'pi pi-users' },
+				{ label: 'Comments', icon: 'pi pi-comments' },
+				{ label: 'Calendar', icon: 'pi pi-calendar' },
 			],
 		};
 	},
+	computed: {
+		...mapStores(useStateStore, useUserStore),
+	},
 	methods: {
-		onMenuClick(event: any) {
-			router.push(event.item.show);
+		navigateTo(to: string) {
+			this.$router.push(to);
+		},
+		toggle(ref: string, e: MouseEvent) {
+			const overlayPanel = this.$refs[ref] as InstanceType<typeof OverlayPanel | typeof Menu>;
+			overlayPanel.toggle(e);
+		},
+		pinMenu(e: MouseEvent, item: any) {
+			const target = e.target as HTMLElement;
+			target.classList.replace('pi-thumbtack', 'pi-spinner');
+			target.classList.add('pi-spin');
+			setTimeout(() => {
+				target.classList.replace('pi-spinner', 'pi-thumbtack');
+				target.classList.remove('pi-spin');
+				this.$toast.add({ severity: 'success', summary: item.pinned ? 'Módulo desfijado' : 'Módulo fijado', life: 3000 });
+			}, 2000);
+		},
+		async logout(e: MouseEvent) {
+			console.log('Logging out...', e);
+
+			this.$confirm.require({
+				target: e.target as HTMLElement,
+				message: '¿Estás seguro que querés salir?',
+				icon: 'pi pi-info-circle',
+				rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
+				acceptClass: 'p-button-danger p-button-sm',
+				rejectLabel: 'Cancelar',
+				acceptLabel: 'Salir',
+				accept: async () => {
+					await this.userStore.signOut();
+					this.navigateTo('/auth/login');
+				},
+				reject: () => {},
+			});
 		},
 	},
 };
 </script>
-<style>
-:root {
-	--primary-color: #000;
-}
-html,
-body {
-	height: 100%;
-	margin: 0;
-}
-#app {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-}
-header {
-	padding: 10px;
-}
-section {
-	flex: 1;
-	display: flex;
-	flex-direction: row;
-}
-nav {
-	flex: 1;
-	padding: 0 10px 10px;
-}
-nav .p-menu {
-	height: 100%;
-}
-main {
-	background-color: #e4e4e4;
-	flex: 5;
-	padding: 20px;
-}
-footer {
-	background-color: #b6b6b6;
-	height: 30px;
-}
-</style>
+<style lang="scss"></style>
