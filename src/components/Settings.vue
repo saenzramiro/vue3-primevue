@@ -1,5 +1,5 @@
 <template>
-	<Sidebar
+	<Drawer
 		v-model:visible="stateStore.settingsDrawer"
 		header="Configuración de Perfil"
 		append-to="body"
@@ -9,7 +9,7 @@
 	>
 		<div class="flex align-items-center mb-5">
 			<label for="darkmode" class="mr-2 text-sm">Dark mode</label>
-			<InputSwitch v-model="darkMode" input-id="darkmode" />
+			<ToggleSwitch v-model="darkMode" input-id="darkmode" />
 		</div>
 		<div class="grid formgrid p-fluid">
 			<div class="field mb-4 col-12">
@@ -38,7 +38,7 @@
 			</div>
 			<div class="field mb-4 col-12 md:col-6">
 				<label for="country" class="font-medium text-900"> Country </label>
-				<Dropdown
+				<Select
 					v-model="selectedCountry"
 					:options="countries"
 					option-label="name"
@@ -61,7 +61,7 @@
 							<div>{{ slotProps.option.name }}</div>
 						</div>
 					</template>
-				</Dropdown>
+				</Select>
 			</div>
 			<div class="field mb-4 col-12 md:col-6">
 				<label for="city" class="font-medium text-900"> City </label>
@@ -82,7 +82,7 @@
 				<Button label="Create User" class="w-auto mt-3"></Button>
 			</div>
 		</div>
-	</Sidebar>
+	</Drawer>
 </template>
 <script lang="ts">
 import { mapStores } from 'pinia';

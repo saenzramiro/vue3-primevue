@@ -53,13 +53,14 @@
 					<div class="flex flex-col items-center gap-2">
 						<template v-for="(item, index) of bottomNavs" :key="index">
 							<Button
+								severity="secondary"
 								:class="
 									selectedNav === item.label
 										? 'bg-surface-0 dark:bg-surface-950 text-surface-900 dark:text-surface-0 border-surface'
 										: 'bg-transparent border-transparent text-surface-600 dark:text-surface-500'
 								"
 								class="w-10 h-10 flex items-center justify-center rounded-lg border hover:bg-surface-0 dark:hover:bg-surface-950 hover:text-surface-900 dark:hover:text-surface-0 hover:border-surface transition-all"
-								@click="selectedNav = item.label"
+								@click="stateStore.showSettings(true)"
 							>
 								<i :class="item.icon" class="text-lg leading-none" />
 							</Button>
@@ -137,6 +138,7 @@ export default {
 				{ label: 'Comments', icon: 'pi pi-comments' },
 				{ label: 'Calendar', icon: 'pi pi-calendar' },
 			],
+			bottomNavs: [{ label: 'Settings', icon: 'pi pi-cog' }],
 		};
 	},
 	computed: {

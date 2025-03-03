@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-reserved-component-names */
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
@@ -9,7 +8,7 @@ import App from './App.vue';
 
 // Prime
 import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
+import Aura from '@primeuix/themes/aura';
 // import StyleClass from 'primevue/styleclass';
 
 import ToastService from 'primevue/toastservice';
@@ -17,7 +16,6 @@ import ConfirmationService from 'primevue/confirmationservice';
 
 import 'primeicons/primeicons.css';
 import './style.css';
-// import 'gridstack/dist/gridstack.min.css';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

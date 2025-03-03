@@ -167,7 +167,7 @@ export default {
 		onShow(): void {
 			this.menu = [];
 		},
-		open(item: MenuItem): void {
+		open(): void {
 			this.stateStore.showSearch(false);
 		},
 	},
