@@ -10,7 +10,7 @@
 		"lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
 		"format": "prettier .  --write",
 		"deploy": "firebase deploy --only hosting",
-		"server": "npm run build:watch --prefix api | npm run emulator",
+		"api": "npm run dev --prefix api",
 		"emulator": "firebase emulators:start --export-on-exit=local --import=local --inspect-functions"
 	},
 	"dependencies": {
