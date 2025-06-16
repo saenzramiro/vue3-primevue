@@ -12,6 +12,9 @@ body {
 #app {
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 *,
 *::before,
@@ -24,8 +27,6 @@ body {
 
 body {
 	min-height: 100vh;
-	color: var(--color-text);
-	background: var(--color-background);
 	transition:
 		color 0.5s,
 		background-color 0.5s;

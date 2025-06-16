@@ -11,7 +11,11 @@ declare module 'vue' {
     Avatar: typeof import('primevue/avatar')['default']
     Button: typeof import('primevue/button')['default']
     ButtonGroup: typeof import('primevue/buttongroup')['default']
+    Card: typeof import('primevue/card')['default']
+    Chips: typeof import('primevue/chips')['default']
+    Column: typeof import('primevue/column')['default']
     ConfirmPopup: typeof import('primevue/confirmpopup')['default']
+    DataTable: typeof import('primevue/datatable')['default']
     Dialog: typeof import('primevue/dialog')['default']
     Divider: typeof import('primevue/divider')['default']
     Drawer: typeof import('primevue/drawer')['default']
@@ -25,17 +29,18 @@ declare module 'vue' {
     InputSwitch: typeof import('primevue/inputswitch')['default']
     InputText: typeof import('primevue/inputtext')['default']
     Password: typeof import('primevue/password')['default']
+    ProgressSpinner: typeof import('primevue/progressspinner')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Search: typeof import('./src/components/Search.vue')['default']
     Select: typeof import('primevue/select')['default']
     Settings: typeof import('./src/components/Settings.vue')['default']
     Sidebar: typeof import('primevue/sidebar')['default']
+    TabPanel: typeof import('primevue/tabpanel')['default']
+    TabView: typeof import('primevue/tabview')['default']
+    Tag: typeof import('primevue/tag')['default']
     Textarea: typeof import('primevue/textarea')['default']
     Toast: typeof import('primevue/toast')['default']
     ToggleSwitch: typeof import('primevue/toggleswitch')['default']
-  }
-  export interface ComponentCustomProperties {
-    StyleClass: typeof import('primevue/styleclass')['default']
   }
 }

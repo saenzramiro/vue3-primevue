@@ -4,7 +4,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 import router from './router';
 
-import App from './App.vue';
+import Root from './Root.vue';
 
 // Prime
 import PrimeVue from 'primevue/config';
@@ -19,7 +19,7 @@ import './style.css';
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
-const app = createApp(App);
+const app = createApp(Root);
 
 // app.directive('styleclass', StyleClass);
 

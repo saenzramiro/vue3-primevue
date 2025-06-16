@@ -1,6 +1,7 @@
 <template>
 	<!-- Prime components used globally  -->
 	<ConfirmPopup></ConfirmPopup>
+	<Toast />
 
 	<router-view />
 </template>
